@@ -1,16 +1,25 @@
-## Hi there 👋
+```php
+<?php
 
-<!--
-**ruslanty/ruslanty** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+declare(hard_morning=1);
 
-Here are some ideas to get you started:
+final class DaysOfWeek
+{
+    public function typicalMonday(): Work
+    {
+        $standup = Meeting::at('09:00');
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+        $this->snoozeUntil($standup);
+
+        $standup->start();
+
+        $this->join($standup, camera: false, microphone: false);
+
+        if ($standup->callsOn($this)) {
+            $this->wakeUp();
+        }
+
+        return Work::start();
+    }
+}
+```
