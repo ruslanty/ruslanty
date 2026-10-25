@@ -3,23 +3,24 @@
 
 declare(hard_morning=1);
 
-final class DaysOfWeek
+final class Monday extends Weekday
 {
-    public function typicalMonday(): Work
+    public function survive(User $me): Work
     {
         $standup = Meeting::at('09:00');
 
-        $this->snoozeUntil($standup);
+        $me->snoozeUntil($standup->startsAt());
 
-        $standup->start();
+        $standup->start()
+            ->join($me, camera: false, microphone: false);
 
-        $this->join($standup, camera: false, microphone: false);
-
-        if ($standup->callsOn($this)) {
-            $this->wakeUp();
+        if ($standup->callsOn($me)) {
+            $me->wakeUp()
+                ->unmute()
+                ->say('What was the question?');
         }
 
-        return Work::start();
+        return Work::start(after: $me->idle());
     }
 }
 ```
